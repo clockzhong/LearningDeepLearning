@@ -22,6 +22,18 @@ def maybe_extract(filename, force=False):
         num_classes, len(data_folders)))
   print(data_folders)
   return data_folders
-  
+
+
+
+if 'train_filename' not in globals():
+	train_filename="notMNIST_large.tar.gz"
+
+if 'test_filename' not in globals():
+	test_filename="notMNIST_small.tar.gz"
+
+#print(train_filename)
+
+
 train_folders = maybe_extract(train_filename)
 test_folders = maybe_extract(test_filename)
+
