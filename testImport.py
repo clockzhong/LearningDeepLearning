@@ -8,11 +8,15 @@ import numpy as np
 import os
 import sys
 import tarfile
+import tensorflow as tf
+
 from IPython.display import display, Image
 from scipy import ndimage
 from sklearn.linear_model import LogisticRegression
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
+
+from six.moves import range
 
 # Config the matplotlib backend as plotting inline in IPython
 %matplotlib inline
