@@ -47,6 +47,11 @@ train_size = 200000
 valid_size = 10000
 test_size = 10000
 
+train_size = 20000
+valid_size = 1000
+test_size = 1000
+
+
 valid_dataset, valid_labels, train_dataset, train_labels = merge_datasets(
   train_datasets, train_size, valid_size)
 _, _, test_dataset, test_labels = merge_datasets(test_datasets, test_size)
