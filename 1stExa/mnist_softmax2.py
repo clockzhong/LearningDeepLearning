@@ -46,17 +46,20 @@ def max_pool_2x2(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
                         strides=[1, 2, 2, 1], padding='SAME')
 
+imageSize=784
+labelSize=10
+
 def main(_):
   # Import data
   mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
   # Create the model
-  x = tf.placeholder(tf.float32, [None, 784])
-  W = tf.Variable(tf.zeros([784, 10]))
-  b = tf.Variable(tf.zeros([10]))
+  x = tf.placeholder(tf.float32, [None, imageSize])
+  W = tf.Variable(tf.zeros([imageSize, labelSize]))
+  b = tf.Variable(tf.zeros([labelSize]))
 
   # Define loss and optimizer
-  y_ = tf.placeholder(tf.float32, [None, 10])
+  y_ = tf.placeholder(tf.float32, [None, labelSize])
 
 
   #y = tf.matmul(x, W) + b
@@ -93,8 +96,8 @@ def main(_):
   h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 
   #Finally, we add a layer, just like for the one layer softmax regression above.
-  W_fc2 = weight_variable([1024, 10])
-  b_fc2 = bias_variable([10])
+  W_fc2 = weight_variable([1024, labelSize])
+  b_fc2 = bias_variable([labelSize])
 
   y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
 
@@ -119,8 +122,7 @@ def main(_):
   for i in range(6000):
     batch = mnist.train.next_batch(1000)
     if i%100 == 0:
-      train_accuracy = accuracy.eval(feed_dict={
-          x:batch[0], y_: batch[1], keep_prob: 1.0})
+      train_accuracy = accuracy.eval(feed_dict={ x:batch[0], y_: batch[1], keep_prob: 1.0})
       print("step %d, training accuracy %g"%(i, train_accuracy*1000))
     train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
@@ -133,3 +135,4 @@ if __name__ == '__main__':
                       help='Directory for storing input data')
   FLAGS, unparsed = parser.parse_known_args()
   tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+

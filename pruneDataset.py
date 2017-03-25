@@ -53,8 +53,7 @@ valid_size = 1000
 test_size = 1000
 """
 
-valid_dataset, valid_labels, train_dataset, train_labels = merge_datasets(
-  train_datasets, train_size, valid_size)
+valid_dataset, valid_labels, train_dataset, train_labels = merge_datasets(  train_datasets, train_size, valid_size)
 _, _, test_dataset, test_labels = merge_datasets(test_datasets, test_size)
 
 print('Training:', train_dataset.shape, train_labels.shape)
